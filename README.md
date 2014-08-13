@@ -45,4 +45,4 @@ ContactUs.setup do |config|
 end
 ```
 
-Nota: Puede obtener las llaves de Recaptcha desde esta dirección [Recaptcha Keys]("https://www.google.com/recaptcha/admin") 
+Nota: Puede obtener las llaves de Recaptcha desde esta dirección [Recaptcha Keys](https://www.google.com/recaptcha/admin) 
