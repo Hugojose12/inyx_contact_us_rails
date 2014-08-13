@@ -29,20 +29,18 @@ Bundle install
 
 ## Configuración
 
-Agregar `config/initializers/contact_us.rb` el siguiente bloque para estabelecer datos de configuración
+Para agregar `config/initializers/contact_us.rb` y asi estabelecer los datos de configuración debe ejecutar
 
 ```ruby
-ContactUs.setup do |config|
-	config.mailer_to = "email_receptor"
-	config.mailer_from = "email_emisor"
-	config.name_web = "nombre_del_sitio_web"
-
-	# Agregar keys de google recaptcha
-	Recaptcha.configure do |config|
-	  config.public_key  = "public_key"
-	  config.private_key = "private_key"
-	end
-end
+rake contact_us:copy_initializer
 ```
 
-Nota: Puede obtener las llaves de Recaptcha desde esta dirección [Recaptcha Keys](https://www.google.com/recaptcha/admin) 
+Nota: Puede obtener las llaves de Recaptcha desde esta dirección [Recaptcha Keys](https://www.google.com/recaptcha/admin)
+
+## Vistas
+
+Para copiar las vistas en `app/views/contact_us` y asi personalizarlas para adaptarlas a sus necesidades debe ejecutar
+
+```ruby
+rake contact_us:copy_views
+```
