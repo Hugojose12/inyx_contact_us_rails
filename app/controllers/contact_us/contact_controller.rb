@@ -2,7 +2,7 @@ require_dependency "contact_us/application_controller"
 
 module ContactUs
   class ContactController < ApplicationController
-  	layout 'application'
+  	layout :resolve_layout
   	def index
     end
 
@@ -14,5 +14,21 @@ module ContactUs
 		  	redirect_to main_app.contact_us_path
 		  end
     end
+
+    def messages
+      authorize! :index, @user, :message => 'Not authorized as an administrator.'
+    end
+
+    private
+
+    def resolve_layout
+      case action_name
+        when "index"
+          "application"
+        else 
+          "admin/application"
+      end
+    end
+
   end
 end
