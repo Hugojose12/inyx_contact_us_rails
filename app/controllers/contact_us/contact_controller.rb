@@ -21,6 +21,13 @@ module ContactUs
       authorize! :index, @user, :message => 'Not authorized as an administrator.'
     end
 
+    def all_messages
+      messages = ContactUs::Message.all
+      respond_with(messages) do |format|
+        format.json { render :json => messages.as_json }
+      end
+    end
+
     private
 
     def resolve_layout

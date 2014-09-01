@@ -4,6 +4,7 @@ class CreateContactUsMessages < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.text :message
+      t.boolean :read, default: false
 
       t.timestamps
     end

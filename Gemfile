@@ -16,4 +16,5 @@ gemspec
 group :development do
   gem 'html2haml'
   gem 'underscore-rails'
+  gem 'jbuilder', '~> 2.0'
 end

@@ -1,3 +1,6 @@
-this.IndexCtrl = function($scope){
-	$scope.saludo = "¡Hola Mundo!";
-}
+this.IndexCtrl = function($scope, messageData){
+	$scope.data = messageData.data;
+
+	messageData.loadMessages();
+};
+this.IndexCtrl.$inject = ['$scope', 'messageData'];
