@@ -8,6 +8,7 @@ angular.module('Contact').factory('messageData', [
             name: 'Loading Contact...',
             email: 'Loading Contact...',
             message: 'Loading Contact...',
+            created_at: 'Loading Contact...',
           }
         ]
       }

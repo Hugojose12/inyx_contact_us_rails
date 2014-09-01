@@ -1,8 +1,14 @@
-<div class="row " ng-repeat="message in data.messages">
-	<div class='messages'>
-		<p class='col-lg-1'><i class='fa fa-envelope'></i> </p>
-		<p class='col-lg-4'>{{ message.name }}</p>
-		<p class='col-lg-6'>{{ message.email }}</p>
-		<p class='col-lg-1'>{{ message.created_at | date}}</p>
-	</div>
-</div>
+<table style="width:100%">
+  <tr class="row" ng-repeat="message in data.messages | orderBy: 'created_at':true">
+    <td class='messages' style="width: 1%;"><input type="checkbox"> </td>
+	<td class='messages' style="width: 1%;"><i class='fa fa-envelope'></i> </td>
+	<td class='messages'>{{ message.name }}</td>
+	<td class='messages' style="width: 60%;">{{ message.email }}</td>
+	<td class='messages'><center>{{ message.created_at | date}}</center></td>
+	<td ng-show="message.length" style="width:100%">No hay mensajes.</td>
+  </tr>
+</table>
+
+
+		
+	
