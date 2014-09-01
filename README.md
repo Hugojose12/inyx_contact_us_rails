@@ -32,7 +32,7 @@ Seguido a esto debemos cargar los assets de la gema, agregando en tu applicactio
 ```ruby
 	//= require contact_us/application
 ```
-Luego importar migraciones y crear las tablas
+Luego importar migraciones y crear las tablas de contactos
 
 ```ruby
 	rake contact_us:install:migrations 
