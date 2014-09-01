@@ -21,6 +21,26 @@ Añadir la siguiente linea a su Gemfile
 gem 'contact_us', git: "https://github.com/inyxtech/inyx_contact_us_rails.git"
 ```
 
+Para agregar `config/initializers/contact_us.rb` y asi estabelecer los datos de configuración debe ejecutar
+
+```ruby
+rake contact_us:copy_initializer
+```
+
+Seguido a esto debemos cargar los assets de la gema, agregando en tu applicaction.js los siguiente
+
+```ruby
+	//= require contact_us/application
+```
+Luego importar migraciones y crear las tablas
+
+```ruby
+	rake contact_us:install:migrations 
+```
+```ruby
+	rake db:migrate
+```
+
 Ubicarse en la ruta del proyecto desde la terminal y ejecutar
 
 ```ruby
