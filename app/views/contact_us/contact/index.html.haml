@@ -9,7 +9,7 @@
 
 		.col-lg-4.col-md-4.col-sm-6.col-xs-12
 			.widget{style: "margin-top:5px;"}
-				.widget-header{ style: 'background-color: #0074be;'}
+				.widget-header
 					%h4 Formulario de contacto
 				.content-widget
 					= form_tag({controller: "contact", action: "send_contact_message", method: "post"}, {class: "contact_form"}) do
@@ -25,56 +25,4 @@
 						= raw recaptcha_tags :display => { :theme => 'custom', lang: 'es' }, ajax: true
 						= button_tag(type: 'submit', class: "btn btn-info", style:"width:100%") do
 							%i.fa.fa-envelope.fa-2x
-		.col-lg-4.col-md-4.col-sm-4.col-xs-12.logo-contact.hidden-xs.hidden-sm
-			= image_tag 'contact_us/logo-contact.png', class: 'img-contact'
-			%h1 PARCATUR
-			%small Cámara de turismo de Paraguaná
-		.col-lg-4.col-md-4.col-sm-6.col-xs-12
-			.widget{style: "margin-top:5px;"}
-				.widget-header{ style: 'background-color: #26bf28;'}
-					%h4 Datos de contacto
-				.content-widget
-					%ul 
-						%li 
-							%i.fa.fa-map-marker.fa-2x{ style:"padding-left: 4px;"} 
-							&nbsp &nbsp Av. 6 CCR Las Virtudes Local A1-7, de la ciudad de Punto Fijo, estado Falcón
-							%br
-							%br 
-						%li 
-							%i.fa.fa-phone.fa-2x{style:"padding-left: 4px;"}
-							&nbsp &nbsp Teléfonos:  +58-416.2254740 / +58-412.1231328
-							%br
-							%br 
-						%li 
-							%i.fa.fa-envelope.fa-2x
-							&nbsp &nbsp Email: contacto@parcatur.org
-							%br 
-							%br
-						%li 
-							%i.fa.fa-facebook-square.fa-2x
-							%a{:href => "https://www.facebook.com/camaradeturismodeparaguana", target: "_blank" }
-								&nbsp &nbsp Visítanos en Facebook
-							%br
-							%br
-						%li 
-							%i.fa.fa-twitter-square.fa-2x
-							%a{:href => "https://twitter.com/PARCATUR", target: "_blank" } 
-								&nbsp &nbsp Síguenos en Twitter
-							%br 
-							%br
-		.col-sm-12.logo-contact.visible-sm
-			= image_tag 'linkedin.png', width: "180px", style: "margin-top: 10px;"
-			%h2 Parcatur
-			%h4 Cámara de turismo de Paraguaná
-
-:javascript
-	$(".img-contact").bind('oanimationend animationend webkitAnimationEnd', function() { 
-		$("h1").addClass("h1-animate");
-		$("h1").css("top", "0px");
-		$("h1").css("opacity", "1");
-		$(".h1-animate").bind('oanimationend animationend webkitAnimationEnd', function() { 
-			$("small").addClass("small-animate");
-			$(".small-animate").css("top", "0px");
-			$(".small-animate").css("opacity", "1");
-		});
-	});
+		

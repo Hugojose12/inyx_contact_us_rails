@@ -30,15 +30,15 @@ rake contact_us:copy_initializer
 Seguido a esto debemos cargar los assets de la gema, agregando en tu applicaction.js los siguiente
 
 ```
-	//= require contact_us/application
+//= require contact_us/application
 ```
 Luego importar migraciones y crear las tablas de contactos desde la consola
 
 ```
-	rake contact_us:install:migrations 
+rake contact_us:install:migrations 
 ```
 ```
-	rake db:migrate
+rake db:migrate
 ```
 
 Ubicarse en la ruta del proyecto desde la terminal y ejecutar
