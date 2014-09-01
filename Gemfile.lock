@@ -96,6 +96,7 @@ GEM
       polyglot (>= 0.3.1)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    underscore-rails (1.7.0)
 
 PLATFORMS
   ruby
@@ -104,3 +105,4 @@ DEPENDENCIES
   contact_us!
   html2haml
   sqlite3
+  underscore-rails
