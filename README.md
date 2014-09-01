@@ -29,15 +29,15 @@ rake contact_us:copy_initializer
 
 Seguido a esto debemos cargar los assets de la gema, agregando en tu applicaction.js los siguiente
 
-```ruby
+```
 	//= require contact_us/application
 ```
-Luego importar migraciones y crear las tablas de contactos
+Luego importar migraciones y crear las tablas de contactos desde la consola
 
-```ruby
+```
 	rake contact_us:install:migrations 
 ```
-```ruby
+```
 	rake db:migrate
 ```
 
