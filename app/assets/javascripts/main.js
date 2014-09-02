@@ -15,9 +15,9 @@ angular.module('Contact', ['ngRoute'])
 
 .config(function($routeProvider){
 	$routeProvider	
-	.when('/contact', { 
-		templateUrl: '../assets/contactIndex.html', 
-		controller: 'IndexCtrl' 
+	.when('/messages/:readId', { 
+		templateUrl: '../assets/contactRead.html', 
+		controller: 'MessagesCtrl' 
 	})
 	.otherwise({
 		templateUrl: '../assets/contactIndex.html',
