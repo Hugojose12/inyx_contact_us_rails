@@ -10,13 +10,20 @@
 <br>
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<b><i class="fa fa-inbox"></i> Buzón de entrada</b>
-		<p class='pull-right'><b>{{data.messages.length}}</b> mensajes en archivo</p>
-	</div>
+		<b><i class="fa fa-inbox"></i> Buzón de entrada</b>			
+	</div>	
   	<div class="panel-body">
+  		<div class="col-lg-10">
+  			<p><b>{{data.messages.length}}</b> mensajes en archivo</p>
+  		</div>	
+  		<div class="col-lg-2">
+  			<button class='btn btn-default'><i class="fa fa-arrow-left"></i></button>
+  			<button class='btn btn-default'><i class="fa fa-arrow-right"></i></button>
+  		</div>
+  		<br><br>
 		<table style="width:100%">
 			<tbody>
-			  <tr class="row" ng-repeat="message in data.messages | orderBy: 'created_at':true | filter:buscar" id='msn-{{message.id}}'>
+			  <tr class="row" ng-repeat="message in data.messages | orderBy: 'created_at':true | filter:buscar | limitTo:2 " id='msn-{{message.id}}'>
 			    <td class='messages' style="width: 1%;" >
 			    	<input type="checkbox" ng-click='msnSelected(message.id)' > 
 			    </td>

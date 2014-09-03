@@ -29,7 +29,7 @@ rake contact_us:copy_initializer
 
 Seguido a esto debemos cargar los assets de la gema, agregando lo siguiente
 
-en Application.js
+en application.js
 
 ```
 //= require contact_us/application
