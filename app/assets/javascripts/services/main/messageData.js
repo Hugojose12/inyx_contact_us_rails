@@ -26,6 +26,15 @@ angular.module('Contact').factory('messageData', [
     }
   };
 
+  messageData.deleteMessage = function($data){
+    $http.post('./posts.json', data).success(function(data) {
+      postData.data.posts.push(data);
+       console.log('Successfully created post.');
+    }).error(function() {
+      console.error('Failed to create new post.');
+    });
+  }
+
   return messageData;
   }
 ]);

@@ -10,7 +10,7 @@ module ContactUs
 
   # Ubicación de la gema
   mattr_accessor :name_web
-
+  SITEBAR = {'contact' => '/messages'}
   # Default way to setup ContactUs. Run rake contact_us:install to create
   # a fresh initializer with all configuration values.
   def self.setup
