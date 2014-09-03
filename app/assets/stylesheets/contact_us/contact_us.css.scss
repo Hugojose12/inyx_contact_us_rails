@@ -4,3 +4,15 @@
 	padding: 15px;
 }
 
+#input-search{
+	padding:6px;
+	border-radius:0px 5px 5px 0px;
+	border: 1px solid #c0c0c0;
+	width: 300px;
+}
+
+@media (max-width: 550px){
+	#input-search{
+		width: 100%;
+	}
+}

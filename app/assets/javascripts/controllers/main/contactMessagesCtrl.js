@@ -1,10 +1,13 @@
-this.MessagesCtrl = function($scope, $routeParams, messageData){
+this.MessagesCtrl = function($scope, $routeParams, $location, messageData){
 	$scope.data = {
 	  messageData: messageData.data
 	};
 
 	messageData.loadMessages();
 	
+	$scope.viewHome = function(){
+	  $location.url('/');
+	};
 
 	$scope.getMessage = function(data){
 		var readId = $routeParams.readId;
@@ -25,4 +28,4 @@ this.MessagesCtrl = function($scope, $routeParams, messageData){
 		}
 	}
 };
-this.MessagesCtrl.$inject = ['$scope', '$routeParams', 'messageData'];
+this.MessagesCtrl.$inject = ['$scope', '$routeParams', '$location', 'messageData'];

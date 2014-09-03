@@ -27,11 +27,19 @@ Para agregar `config/initializers/contact_us.rb` y asi estabelecer los datos de 
 rake contact_us:copy_initializer
 ```
 
-Seguido a esto debemos cargar los assets de la gema, agregando en tu applicaction.js los siguiente
+Seguido a esto debemos cargar los assets de la gema, agregando lo siguiente
+
+en Application.js
 
 ```
 //= require contact_us/application
 ```
+en application.css
+
+```
+*= require contact_us/application
+```
+
 Luego importar migraciones y crear las tablas de contactos desde la consola
 
 ```

@@ -15,7 +15,7 @@ angular.module('Contact', ['ngRoute'])
 
 .config(function($routeProvider){
 	$routeProvider	
-	.when('/messages/:readId', { 
+	.when('/:readId', { 
 		templateUrl: '../assets/contactRead.html', 
 		controller: 'MessagesCtrl' 
 	})
