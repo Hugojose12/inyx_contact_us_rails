@@ -16,4 +16,5 @@
 //= require lib/underscore
 //= require lib/angular
 //= require lib/angular-route
+//= require lib/angular-resource
 //= require main
