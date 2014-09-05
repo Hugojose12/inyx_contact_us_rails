@@ -9,5 +9,6 @@ ContactUs::Engine.routes.draw do
 		post 'contact/destroy', to: 'contact#destroy', as: "destroy"
 		get "contact/angular_message/:id", to: 'contact#one_message'		
 		get 'contact/angular_index', to: 'contact#all_messages'
+		get 'contact/angular_read/:id', to: 'contact#read_message'
   	end
 end

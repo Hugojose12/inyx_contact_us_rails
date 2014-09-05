@@ -40,7 +40,18 @@ module ContactUs
       respond_to do |format|
         format.json { render :json => message.as_json }
       end
-    end    
+    end   
+
+    def read_message
+      message = Message.find(params[:id])
+      if message.read == false
+        message.read = true
+        message.save        
+      end
+      respond_to do |format|
+        format.json { render :json => message.as_json }
+      end
+    end 
 
     def destroy
       ContactUs::Message.destroy( redefine_destroy params[:ids].split(",") )

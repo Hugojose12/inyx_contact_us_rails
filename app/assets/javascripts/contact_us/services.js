@@ -25,6 +25,15 @@ angular.module('contact').factory('contact', [
     });
   };
 
+  contact.read_message = function(id) {
+    $http.get('../admin/contact/angular_read/'+id+'.json').success(function(data) {
+      contact.data = data;
+      console.log('Successfully loaded messages.');
+    }).error(function() {
+      console.error('Failed to load messages.');
+    });
+  };
+
   contact.destroy = function(messages, key) {
     var url = key == 1 ? "../admin/contact/destroy/":"../contact/destroy/" 
     $http({

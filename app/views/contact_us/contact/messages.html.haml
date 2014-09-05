@@ -1,21 +1,21 @@
-.angular{'ng-controller'=>'indexCtrl',  style:"padding:30px;"}
+.angular{'ng-controller'=>'indexCtrl',  style:"padding:30px;padding-bottom:0px;"}
   .form-inline
     .form-group
       .input-group
         .input-group-addon
           %i.fa.fa-search
         %input#input-search{"ng-model" => "buscar.$", :placeholder => "Buscar Mensaje", :type => "text"}
-    %button.btn.btn-default{:title => "Bandeja de entrada"}
-      %i.fa.fa-inbox
     %button.btn.btn-default{"ng-click" => "msnRefresh()", :title => "Actualizar lista de mensajes"}
       %i.fa.fa-refresh#icon-refresh  
     %a.btn.btn-default{"ng-click" => "msnSelect(messages)", :title => "Seleccionar todos los mensajes"}
       %i.fa.fa-check-square-o
     %button#msn-delete.btn.btn-default{:disabled => "", :style => "opacity:0;", "ng-click" => "destroy()", :title => "Borrar mensajes seleccionados"}
-      %i.fa.fa-trash-o
-    %button.btn.btn-default.pull-right
+      %i.fa.fa-trash-o     
+    %button.btn.btn-default.pull-right.hidden-xs{'disabled'=>"", style:"color:#000"}
+      Página {{page}}
+    %button.btn.btn-default.pull-right{"ng-click" => "nextListMessages()", :title => "Siguiente"}
       %i.fa.fa-arrow-right
-    %button.btn.btn-default.pull-right
+    %button.btn.btn-default.pull-right{"ng-click" => "lastListMessages()", :title => "Atras"}
       %i.fa.fa-arrow-left
   %br
     .panel.panel-default
@@ -29,11 +29,12 @@
       .panel-body
         %table{:style => "width:100%"}
           %tbody
-            %tr.row-message{:id => "msn-{{message.id}}", "ng-repeat" => "message in messages.data | orderBy: 'created_at':true | filter:buscar | limitTo:50 "}
+            %tr.row-message{:id => "msn-{{message.id}}", "ng-repeat" => "message in messages.data | orderBy: 'created_at':true | filter:buscar | interval:interval_a:interval_b" }
               %td.messages{:style => "width: 1%;"}
                 %input.msn-check{:id => "checkmsn-{{message.id}}", "ng-click" => "msnSelected(message.id)", :type => "checkbox"}
               %td.messages.hidden-xs{"ng-click" => "viewMessage(message.id)", :style => "width: 1%;"}
-                %i.fa.fa-envelope
+                %i.fa.fa-envelope{'ng-if'=>"message.read == false"}
+                %i.fa.fa-file-text-o{'ng-if'=>"message.read == true"}
               %td.messages{"ng-click" => "viewMessage(message.id)"} {{ message.name }}
               %td.messages.hidden-xs{"ng-click" => "viewMessage(message.id)", :style => "width: 60%;"} {{ message.email }}
               %td.messages{"ng-click" => "viewMessage(message.id)"}
