@@ -1,10 +1,5 @@
 .angular{'ng-controller'=>'showCtrl','ng-init'=>"init(#{@message})",  style:"padding:30px;"}
     .form-inline
-        .form-group
-            .input-group
-                .input-group-addon
-                    %i.fa.fa-search
-                %input#input-search{"ng-model" => "buscar.$", :placeholder => "Buscar Mensaje", :type => "text"}
         %button.btn.btn-default{"ng-click" => "viewHome()", :title => "Bandeja de entrada"}
             %i.fa.fa-inbox
         %button#msn-delete.btn.btn-default{"ng-click" => "destroy(message.data.id)", :title => "Borrar mensaje"}
