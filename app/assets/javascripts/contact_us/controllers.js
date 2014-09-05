@@ -1,16 +1,20 @@
 angular.module('contact', [])
-  .controller('conctactCtrl', ['$scope', 'contact', function($scope, contact) {
- 			
-    	contact.load();
-    	$scope.messages = contact;
+	.controller('indexCtrl', ['$scope','contact', function($scope, contact) {				
+		contact.load();
+		$scope.messages = contact;
 
-    	var clickAll = false;
+		var clickAll = false;
 
 			var selected = [];
 
-			$scope.destroy = function() {	
-			 	contact.destroy(selected);
-			 	selected = [] /*incializa el array luego de eliminar*/
+			$scope.destroy = function() {
+				if (confirm("¿Deseas eliminar los mensajes seleccionados?") == true) {
+					var msnDelete = $("#msn-delete");	
+				 	contact.destroy(selected, 1);
+				 	selected = [] /*incializa el array luego de eliminar*/
+				 	msnDelete.css("opacity", "0");
+					msnDelete.attr("disabled", "disabled");
+				}
 			};
 
 			$scope.msnSelected = function(id){
@@ -20,10 +24,10 @@ angular.module('contact', [])
 				var checkMsn = $("#checkmsn-"+id);
 				for(var i=0;i<selected.length;i++){
 					if(selected[i]==id){				
-						msnId.css("background", "#ffffff");
 						checkMsn.prop('checked', false);
 						selected.splice(i,1);	
 						found = 1;
+						msnId.removeAttr("style");
 					}
 				}
 				if(found==0){
@@ -59,14 +63,48 @@ angular.module('contact', [])
 					msnDelete.attr("disabled", "disabled");
 					selected=["empty"];
 					for(var i=0; i<messages.data.length; i++){	
-						$("#msn-"+messages.data[i].id).css("background", "#ffffff");
+						$("#msn-"+messages.data[i].id).removeAttr("style");
 					}
 					clickAll = false;
 				}
 				console.log(selected);	
 			};
 
-  }]);
+			$scope.msnRefresh = function(){
+				refresh = $("#icon-refresh");
+				refresh.prop("class", "fa fa-refresh fa-spin");
+				contact.load();
+				$scope.messages = contact;
+				refresh.prop("class", "fa fa-refresh");
+			}
+
+			$scope.viewMessage = function(id){
+				document.location ='/admin/messages/'+id;
+			}
+
+	}])
+	.controller('showCtrl', ['$scope','contact', function($scope, contact) {
+
+		var selected = [];
+		
+		$scope.init = function(id){
+			contact.find_by_message(id);
+			$scope.message = contact;
+		}
+
+		$scope.viewHome = function(){
+			document.location ='/admin/messages';
+		}
+
+		$scope.destroy = function(id) {
+		    if (confirm("¿Deseas eliminar este mensaje?") == true) {
+		    	selected.push(id);
+			 	contact.destroy(selected, 2);
+			 	selected = [] /*incializa el array luego de eliminar*/
+			 	document.location ='/admin/messages';
+		    } 			
+		};
+	}]);
 
   $(document).on('ready page:load', function(arguments) {
 	  angular.bootstrap(document.body, ['inyxmater'])

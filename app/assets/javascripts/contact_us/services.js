@@ -1,4 +1,4 @@
-angular.module('employee').factory('contact', [
+angular.module('contact').factory('contact', [
   '$http', function($http) {
   var contact = {};
 
@@ -16,10 +16,19 @@ angular.module('employee').factory('contact', [
     MessageAll();
   };
 
-  contact.destroy = function(messages) {
-    console.log(JSON.stringify(messages))
+  contact.find_by_message = function(id) {
+    $http.get('../contact/angular_message/'+id+'.json').success(function(data) {
+      contact.data = data;
+      console.log('Successfully loaded messages.');
+    }).error(function() {
+      console.error('Failed to load messages.');
+    });
+  };
+
+  contact.destroy = function(messages, key) {
+    var url = key == 1 ? "../admin/contact/destroy/":"../contact/destroy/" 
     $http({
-      url: "../admin/contact/destroy/", 
+      url: url, 
       method: "POST",
       params: { ids: messages.toString() }
     }).success(function(data) {
