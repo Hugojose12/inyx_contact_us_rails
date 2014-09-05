@@ -1,3 +1,47 @@
-%section{"ng-app"=>"Contact", style:"width: 100%;"}	
-	.block{"ng-view"=>"", style:"padding-left:30px;padding-right:0px;"}
-		
+%div{"ng-app"=>"contact"}
+  .angular{'ng-controller'=>'conctactCtrl',  style:"padding:30px;"}
+    .form-inline
+      .form-group
+        .input-group
+          .input-group-addon
+            %i.fa.fa-search
+          %input#input-search{"ng-model" => "buscar.$", :placeholder => "Buscar Mensaje", :type => "text"}
+      %button.btn.btn-default
+        %i.fa.fa-inbox{"ng-click" => "viewHome()", :title => "Bandeja de entrada"}
+      %a.btn.btn-default{"ng-click" => "msnSelect(messages)", :title => "Seleccionar todos los mensajes"}
+        %i.fa.fa-check-square-o
+      %button#msn-delete.btn.btn-default{:disabled => "", :style => "opacity:0;"}
+        %i.fa.fa-trash-o{"ng-click" => "destroy()", :title => "Borrar mensajes seleccionados"}
+      %button.btn.btn-default.pull-right
+        %i.fa.fa-arrow-right
+      %button.btn.btn-default.pull-right
+        %i.fa.fa-arrow-left
+    %br
+      .panel.panel-default
+        .panel-heading
+          %b
+            %i.fa.fa-inbox
+            Buzón de entrada
+          %p.pull-right
+            %b {{messages.data.length}}
+            mensajes en archivo
+        .panel-body
+          %table{:style => "width:100%"}
+            %tbody
+              %tr.row{:id => "msn-{{message.id}}", "ng-repeat" => "message in messages.data | orderBy: 'created_at':true | filter:buscar | limitTo:50 "}
+                %td.messages{:style => "width: 1%;"}
+                  %input.msn-check{:id => "checkmsn-{{message.id}}", "ng-click" => "msnSelected(message.id)", :type => "checkbox"}
+                %td.messages.hidden-xs{"ng-click" => "viewMessage(message.id)", :style => "width: 1%;"}
+                  %i.fa.fa-envelope
+                %td.messages{"ng-click" => "viewMessage(message.id)"} {{ message.name }}
+                %td.messages.hidden-xs{"ng-click" => "viewMessage(message.id)", :style => "width: 60%;"} {{ message.email }}
+                %td.messages{"ng-click" => "viewMessage(message.id)"}
+                  %center
+                    {{ message.created_at | date}}
+                    %span.hidden-xs - {{ message.created_at | date:'HH:mm'}}
+              %tr{"ng-show" => "!messages.data.length"}
+                %td{:style => "width:100%"}
+                  %center
+                    %i.fa.fa-frown-o
+                    No hay mensajes.
+        .panel-footer
