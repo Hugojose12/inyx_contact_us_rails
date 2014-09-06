@@ -1,19 +1,13 @@
 angular.module('contact').factory('contact', [
   '$http', function($http) {
   var contact = {};
-
-  /*Metodo para traer todos los mensajes de la base de datos*/
-  MessageAll = function() {
-    $http.get('../admin/contact/angular_index.json').success(function(data) {
-      contact.data = data;
-      console.log('Successfully loaded messages.');
-    }).error(function() {
-      console.error('Failed to load messages.');
-    });
-  }
+  var route_index = '/admin/contact/angular_index.json';
+  var route_destroy = "/admin/contact/destroy/";
 
   contact.load = function() {
-    MessageAll();
+    Model.all(route_index, $http, function(output){
+      contact.data = output;
+    });
   };
 
   contact.find_by_message = function(id) {
@@ -26,7 +20,7 @@ angular.module('contact').factory('contact', [
   };
 
   contact.read_message = function(id) {
-    $http.get('../admin/contact/angular_read/'+id+'.json').success(function(data) {
+    $http.get('/admin/contact/angular_read/'+id+'.json').success(function(data) {
       contact.data = data;
       console.log('Successfully loaded messages.');
     }).error(function() {
@@ -34,18 +28,12 @@ angular.module('contact').factory('contact', [
     });
   };
 
-  contact.destroy = function(messages, key) {
-    var url = key == 1 ? "../admin/contact/destroy/":"../contact/destroy/" 
-    $http({
-      url: url, 
-      method: "POST",
-      params: { ids: messages.toString() }
-    }).success(function(data) {
-      MessageAll(); /*carga los datos luego de eliminar*/
-    }).error(function() {
-      console.error('Fail :(.');
-      MessageAll(); /*carga los datos si no consigue eliminarlos, luego te explico del porque colocarlo aqui tambien*/
-    });
+  contact.destroy = function(ids) {    
+    Model.destroy(route_destroy_index, $http, ids, function(output){
+      Model.all(route_index, $http, function(output){
+        contact.data = output;
+      });
+    });    
   };  
 
   return contact;

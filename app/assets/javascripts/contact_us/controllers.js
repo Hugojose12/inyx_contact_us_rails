@@ -2,102 +2,42 @@ angular.module('contact', [])
 	.controller('indexCtrl', ['$scope','contact', function($scope, contact) {				
 		contact.load();
 		$scope.messages = contact;
-		var clickAll = false;
-		var selected = [];
 		$scope.interval_a = 0;
 		$scope.interval_b = 10;
 		$scope.page = 1;
 
 		$scope.destroy = function() {
 			if (confirm("¿Deseas eliminar los mensajes seleccionados?") == true) {
-				var msnDelete = $("#msn-delete");	
-			 	contact.destroy(selected, 1);
-			 	selected = [] /*incializa el array luego de eliminar*/
-			 	msnDelete.css("opacity", "0");
-				msnDelete.attr("disabled", "disabled");
+				ctrl.deleteBtnStatus("#btn-delete", 0);
+			 	contact.destroy(ctrl.selected);
+			 	ctrl.selected = [] /*incializa el array luego de eliminar*/
 			}
 		};
 
-		$scope.msnSelected = function(id){
-			var found = 0;
-			var msnId = $("#msn-"+id);
-			var msnDelete = $("#msn-delete");
-			var checkMsn = $("#checkmsn-"+id);
-			for(var i=0;i<selected.length;i++){
-				if(selected[i]==id){				
-					checkMsn.prop('checked', false);
-					selected.splice(i,1);	
-					found = 1;
-					msnId.removeAttr("style");
-				}
-			}
-			if(found==0){
-				selected.push(id);
-				msnId.css("background", "#fcf8e3");
-				checkMsn.prop('checked', true);
-			}
-			if(selected.length>0){
-				msnDelete.css("opacity", "1");
-				msnDelete.removeAttr("disabled");
-			}else{
-				msnDelete.css("opacity", "0");
-				msnDelete.attr("disabled", "disabled");
-			}
-			console.log(selected);	
+		$scope.selected = function(id){
+			ctrl.itemSelected(id, "#row-", "#btn-delete", "#check-");
 		};	
 
-		$scope.msnSelect = function(messages){
-			var msnDelete = $("#msn-delete");
-			selected=[];	
-			if(clickAll==false){		
-				$(".msn-check").prop('checked', true);
-				msnDelete.css("opacity", "1");
-				msnDelete.removeAttr("disabled");
-				for(var i=0; i<messages.data.length; i++){
-					selected.push(messages.data[i].id);	
-					$("#msn-"+messages.data[i].id).css("background", "#fcf8e3");
-				}
-				clickAll = true;
-			}else{
-				$(".msn-check").prop('checked', false);
-				msnDelete.css("opacity", "0");
-				msnDelete.attr("disabled", "disabled");
-				selected=["empty"];
-				for(var i=0; i<messages.data.length; i++){	
-					$("#msn-"+messages.data[i].id).removeAttr("style");
-				}
-				clickAll = false;
-			}
-			console.log(selected);	
+		$scope.allSelected = function(messages){
+			ctrl.allItemsSelected("#row-", "#btn-delete", ".check", messages);
 		};
 
-		$scope.msnRefresh = function(){
-			refresh = $("#icon-refresh");
-			refresh.prop("class", "fa fa-refresh fa-spin");
+		$scope.refresh = function(){
 			contact.load();
 			$scope.messages = contact;
-			refresh.prop("class", "fa fa-refresh");
 		}
 
-		$scope.viewMessage = function(id){			
+		$scope.show = function(id){			
 			contact.read_message(id);
-			document.location ='/admin/messages/'+id;
+			route.show_path(id);
 		}
 
-		$scope.nextListMessages = function(){
-			if( $scope.interval_b < $scope.messages.data.length ){
-				$scope.interval_a = $scope.interval_a+10;
-				$scope.interval_b = $scope.interval_b+10;
-				$scope.page = $scope.page + 1;
-			}
+		$scope.nextList = function(){
+			ctrl.paginateControl($scope, "next");
 		}
 
-		$scope.lastListMessages = function(){
-			if( $scope.interval_a > 0 ){
-				$scope.interval_a=$scope.interval_a-10;
-				$scope.interval_b=$scope.interval_b-10;
-				$scope.page = $scope.page - 1;
-			}
+		$scope.lastList = function(){
+			ctrl.paginateControl($scope, "last");			
 		}
 	}])
 	.controller('showCtrl', ['$scope','contact', function($scope, contact) {
@@ -109,21 +49,17 @@ angular.module('contact', [])
 			$scope.message = contact;
 		}
 
-		$scope.viewHome = function(){
-			document.location ='/admin/messages';
+		$scope.index = function(){
+			route.index_path();
 		}
 
 		$scope.destroy = function(id) {
 		    if (confirm("¿Deseas eliminar este mensaje?") == true) {
 		    	selected.push(id);
-			 	contact.destroy(selected, 2);
+			 	contact.destroy(selected);
 			 	selected = [] /*incializa el array luego de eliminar*/
 			 	document.location ='/admin/messages';
 		    } 			
 		};
 	}]);
-
-  $(document).on('ready page:load', function(arguments) {
-	  angular.bootstrap(document.body, ['inyxmater'])
-	});
 

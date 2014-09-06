@@ -1,6 +1,6 @@
 .angular{'ng-controller'=>'showCtrl','ng-init'=>"init(#{@message})",  style:"padding:30px;;padding-bottom:0px;"}
     .form-inline
-        %button.btn.btn-default{"ng-click" => "viewHome()", :title => "Bandeja de entrada"}
+        %button.btn.btn-default{"ng-click" => "index()", :title => "Bandeja de entrada"}
             %i.fa.fa-inbox
         %button#msn-delete.btn.btn-default{"ng-click" => "destroy(message.data.id)", :title => "Borrar mensaje"}
             %i.fa.fa-trash-o

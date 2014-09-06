@@ -5,17 +5,17 @@
         .input-group-addon
           %i.fa.fa-search
         %input#input-search{"ng-model" => "buscar.$", :placeholder => "Buscar Mensaje", :type => "text"}
-    %button.btn.btn-default{"ng-click" => "msnRefresh()", :title => "Actualizar lista de mensajes"}
+    %button.btn.btn-default{"ng-click" => "refresh()", :title => "Actualizar lista de mensajes"}
       %i.fa.fa-refresh#icon-refresh  
-    %a.btn.btn-default{"ng-click" => "msnSelect(messages)", :title => "Seleccionar todos los mensajes"}
+    %a.btn.btn-default{"ng-click" => "allSelected(messages)", :title => "Seleccionar todos los mensajes"}
       %i.fa.fa-check-square-o
-    %button#msn-delete.btn.btn-default{:disabled => "", :style => "opacity:0;", "ng-click" => "destroy()", :title => "Borrar mensajes seleccionados"}
+    %button#btn-delete.btn.btn-default{:disabled => "", :style => "opacity:0;", "ng-click" => "destroy()", :title => "Borrar mensajes seleccionados"}
       %i.fa.fa-trash-o     
     %button.btn.btn-default.pull-right.hidden-xs{'disabled'=>"", style:"color:#000"}
       Página {{page}}
-    %button.btn.btn-default.pull-right{"ng-click" => "nextListMessages()", :title => "Siguiente"}
+    %button.btn.btn-default.pull-right{"ng-click" => "nextList()", :title => "Siguiente"}
       %i.fa.fa-arrow-right
-    %button.btn.btn-default.pull-right{"ng-click" => "lastListMessages()", :title => "Atras"}
+    %button.btn.btn-default.pull-right{"ng-click" => "lastList()", :title => "Atras"}
       %i.fa.fa-arrow-left
   %br
     .panel.panel-default
@@ -29,18 +29,30 @@
       .panel-body
         %table{:style => "width:100%"}
           %tbody
-            %tr.row-message{:id => "msn-{{message.id}}", "ng-repeat" => "message in messages.data | orderBy: 'created_at':true | filter:buscar | interval:interval_a:interval_b" }
+            %tr.row-message{"ng-click" => "show(message.id)", :id => "row-{{message.id}}", "ng-repeat" => "message in messages.data | orderBy: 'created_at':true | filter:buscar | interval:interval_a:interval_b" }
               %td.messages{:style => "width: 1%;"}
-                %input.msn-check{:id => "checkmsn-{{message.id}}", "ng-click" => "msnSelected(message.id)", :type => "checkbox"}
-              %td.messages.hidden-xs{"ng-click" => "viewMessage(message.id)", :style => "width: 1%;"}
+                %input.check{:id => "check-{{message.id}}", "ng-click" => "selected(message.id);$event.stopPropagation();", :type => "checkbox"}
+              %td.messages.hidden-xs{:style => "width: 1%;"}
                 %i.fa.fa-envelope{'ng-if'=>"message.read == false"}
                 %i.fa.fa-file-text-o{'ng-if'=>"message.read == true"}
-              %td.messages{"ng-click" => "viewMessage(message.id)"} {{ message.name }}
-              %td.messages.hidden-xs{"ng-click" => "viewMessage(message.id)", :style => "width: 60%;"} {{ message.email }}
-              %td.messages{"ng-click" => "viewMessage(message.id)"}
+              %td.messages
+                %b{'ng-if'=>"message.read == false"}
+                  {{ message.name }}
+                %span{'ng-if'=>"message.read == true"}
+                  {{ message.name }}  
+              %td.messages.hidden-xs{ :style => "width: 60%;"}
+                %b{'ng-if'=>"message.read == false"}
+                  {{ message.email }}
+                %span{'ng-if'=>"message.read == true"}
+                  {{ message.email }}  
+              %td.messages
                 %center
-                  {{ message.created_at | date}}
-                  %span.hidden-xs - {{ message.created_at | date:'HH:mm'}}
+                  %b{'ng-if'=>"message.read == false"}
+                    {{ message.created_at | date}}
+                    %span.hidden-xs - {{ message.created_at | date:'HH:mm'}}
+                  %span{'ng-if'=>"message.read == true"}
+                    {{ message.created_at | date}}
+                    %span.hidden-xs - {{ message.created_at | date:'HH:mm'}}  
             %tr{"ng-show" => "!messages.data.length"}
               %td{:style => "width:100%"}
                 %center
