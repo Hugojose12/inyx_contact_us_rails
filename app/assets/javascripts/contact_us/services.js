@@ -1,11 +1,9 @@
 angular.module('contact').factory('contact', [
   '$http', function($http) {
   var contact = {};
-  var route_index = '/admin/contact/angular_index.json';
-  var route_destroy = "/admin/contact/destroy/";
 
   contact.load = function() {
-    Model.all(route_index, $http, function(output){
+    Model.all(route.index_json_path, $http, function(output){
       contact.data = output;
     });
   };
@@ -29,8 +27,8 @@ angular.module('contact').factory('contact', [
   };
 
   contact.destroy = function(ids) {    
-    Model.destroy(route_destroy_index, $http, ids, function(output){
-      Model.all(route_index, $http, function(output){
+    Model.destroy(route.destroy_path, $http, ids, function(output){
+      Model.all(route.index_json_path, $http, function(output){
         contact.data = output;
       });
     });    
