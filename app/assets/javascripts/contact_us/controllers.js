@@ -6,6 +6,7 @@ angular.module('contact', [])
 		$scope.interval_b = 10;
 		$scope.page = 1;
 
+
 		$scope.destroy = function() {
 			if (confirm("¿Deseas eliminar los mensajes seleccionados?") == true) {
 				ctrl.deleteBtnStatus("#btn-delete", 0);
@@ -24,7 +25,8 @@ angular.module('contact', [])
 
 		$scope.refresh = function(){
 			contact.load();
-			$scope.messages = contact;
+			$scope.messages = contact;							
+			ctrl.refreshList("#row-", "#check-");
 		}
 
 		$scope.show = function(id){			
@@ -33,7 +35,7 @@ angular.module('contact', [])
 		}
 
 		$scope.nextList = function(){
-			ctrl.paginateControl($scope, "next");
+			ctrl.paginateControl($scope, $scope.messages.data.length,"next");
 		}
 
 		$scope.lastList = function(){
@@ -47,6 +49,7 @@ angular.module('contact', [])
 		$scope.init = function(id){
 			contact.find_by_message(id);
 			$scope.message = contact;
+			console.log(ctrl.selected);
 		}
 
 		$scope.index = function(){

@@ -1,10 +1,7 @@
 var route = {};
-(function(){	
-	
-  	this.index_json_path = '/admin/contact/angular_index.json';
-  
-  	this.destroy_path = "/admin/contact/destroy/";
+(function(){
 
+	/*Rutas App*/
 	this.index_path = function(){
 		document.location ='/admin/messages/';
 	}
@@ -12,5 +9,19 @@ var route = {};
 	this.show_path = function(id){
 		document.location ='/admin/messages/'+id;
 	}
+	/*end*/
+
+	/*Rutas Ajax*/
+  	this.index_json_path = '/admin/contact/angular_index.json';
+  
+  	this.destroy_path = "/admin/contact/destroy/";
+
+  	this.read_path = function(id){
+  		return '../contact/angular_read/'+id+'.json'
+  	}
+  	this.find_message_path = function(id){
+  		return '/admin/contact/angular_message/'+id+'.json'
+  	}  	
+  	/*end*/
 
 }).apply(route);
