@@ -9,7 +9,8 @@ module ContactUs
     end
 
     def show_message
-      @message = params[:id]
+      @message = ContactUs::Message.find(params[:id])
+      @message.update_attribute(:read, true) if @message.read == false
     end
 
     def send_contact_message
@@ -28,7 +29,7 @@ module ContactUs
 
     #controlares para app angular 
     def all_messages
-      messages = ContactUs::Message.all
+      messages = ContactUs::Message.all.order('created_at DESC')
       respond_to do |format|
         format.html
         format.json { render :json => messages.as_json }

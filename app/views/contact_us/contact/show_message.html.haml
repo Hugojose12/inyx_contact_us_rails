@@ -1,29 +1,30 @@
-.angular{'ng-controller'=>'showCtrl','ng-init'=>"init(#{@message})",  style:"padding:30px;;padding-bottom:0px;"}
-    .form-inline
-        %button.btn.btn-default{"ng-click" => "index()", :title => "Bandeja de entrada"}
-            %i.fa.fa-inbox
-        %button#msn-delete.btn.btn-default{"ng-click" => "destroy(message.data.id)", :title => "Borrar mensaje"}
-            %i.fa.fa-trash-o
-        %br
-    %br
-    .panel.panel-default        
-        .panel-heading
-            %b
-                %i.fa.fa-envelope
-                {{message.data.email}}
-        .panel-body
-
-            .row
-                .col-lg-10
-                    %h2 {{message.data.name}}
-                    {{message.data.email}}
-                    %br/
-                    {{message.data.created_at | date}}
-                    %br/
-                    {{message.data.created_at | date:'HH:mm'}}
-                .col-lg-2{style:"font-size:120px;color:#F2F2F2;"}
-                    %i.fa.fa-envelope-o.hidden-xs.hidden-sm.hidden-md         
-            %hr
-                %p{style:"font-size:18px;"}
-                    {{message.data.message}}
-        .panel-footer
+= content_for(:title, "Admin - #{@message.email}")
+.angular{'ng-controller'=>'showCtrl','ng-init'=>"init()",  style:"padding:30px;;padding-bottom:0px;"}
+  .form-inline
+  %button.btn.btn-default{"ng-click" => "index()", :title => "Bandeja de entrada"}
+    %i.fa.fa-inbox
+  %button#msn-delete.btn.btn-default{"ng-click" => "destroy(#{@message.id})", :title => "Borrar mensaje"}
+    %i.fa.fa-trash-o
+  %br
+  %br
+  .panel.panel-default        
+    .panel-heading
+      %b
+      %i.fa.fa-envelope
+        = @message.email
+    .panel-body
+      .row
+        .col-lg-10
+          %h2 
+            = @message.name
+          = @message.email
+          %br/
+          = @message.created_at
+          %br/
+          = @message.created_at
+        .col-lg-2{style:"font-size:120px;color:#F2F2F2;"}
+          %i.fa.fa-envelope-o.hidden-xs.hidden-sm.hidden-
+      %hr   
+      %p{style:"font-size:18px; text-align:justify;"}
+        = @message.message
+    .panel-footer

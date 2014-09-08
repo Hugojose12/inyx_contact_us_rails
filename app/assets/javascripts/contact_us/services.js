@@ -14,15 +14,9 @@ angular.module('contact').factory('contact', [
     });
   };
 
-  contact.read_message = function(id) {
-    Model.get(route.read_path(id), $http, function(output){
-      contact.data = output;
-    });
-  };
-
   contact.destroy = function(ids) {    
     Model.destroy(route.destroy_path, $http, ids, function(output){
-      Model.all(route.index_json_path, $http, function(output){
+      Model.get(route.index_json_path, $http, function(output){
         contact.data = output;
       });
     });    

@@ -5,32 +5,40 @@ angular.module('contact', [])
 		$scope.interval_a = 0;
 		$scope.interval_b = 10;
 		$scope.page = 1;
+		$scope.btnDelete = false;
+		$scope.btnAllSelect = false;
 
+		$scope.init = function(){
+			ctrl.pages = {};
+			$scope.page = 1;			
+			$scope.interval_a = 0;
+			$scope.interval_b = 10;
+		}
 
 		$scope.destroy = function() {
 			if (confirm("¿Deseas eliminar los mensajes seleccionados?") == true) {
-				ctrl.deleteBtnStatus("#btn-delete", 0);
 			 	contact.destroy(ctrl.selected);
-			 	ctrl.selected = [] /*incializa el array luego de eliminar*/
+			 	ctrl.pageInit($scope);
+				contact.load();
+ 				$scope.messages = contact;
 			}
 		};
 
 		$scope.selected = function(id){
-			ctrl.itemSelected(id, "#row-", "#btn-delete", "#check-");
+			ctrl.itemSelected(id, $scope);
 		};	
 
-		$scope.allSelected = function(messages){
-			ctrl.allItemsSelected("#row-", "#btn-delete", ".check", messages);
+		$scope.allSelected = function(){
+			ctrl.allItemsSelected($scope, $scope.messages);
 		};
 
 		$scope.refresh = function(){
 			contact.load();
 			$scope.messages = contact;							
-			ctrl.refreshList("#row-", "#check-");
+			ctrl.pageInit($scope);
 		}
 
-		$scope.show = function(id){			
-			contact.read_message(id);
+		$scope.show = function(id){	
 			route.show_path(id);
 		}
 
@@ -46,10 +54,8 @@ angular.module('contact', [])
 
 		var selected = [];
 		
-		$scope.init = function(id){
-			contact.find_by_message(id);
-			$scope.message = contact;
-			console.log(ctrl.selected);
+		$scope.init = function(){
+			//init function
 		}
 
 		$scope.index = function(){
