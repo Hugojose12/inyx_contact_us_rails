@@ -1,7 +1,7 @@
 = content_for(:title, "Admin - #{@message.email}")
 .angular{'ng-controller'=>'showCtrl','ng-init'=>"init()",  style:"padding:30px;;padding-bottom:0px;"}
   .form-inline
-  %button.btn.btn-default{"ng-click" => "index()", :title => "Bandeja de entrada"}
+  %a.btn.btn-default{href: "/admin/messages", :title => "Bandeja de entrada"}
     %i.fa.fa-inbox
   %button#msn-delete.btn.btn-default{"ng-click" => "destroy(#{@message.id})", :title => "Borrar mensaje"}
     %i.fa.fa-trash-o
@@ -19,9 +19,9 @@
             = @message.name
           = @message.email
           %br/
-          = @message.created_at.strftime('%b %d, %Y')
+          = @message.created_at.strftime("%B %d, %Y")
           %br/
-          = @message.created_at.strftime('%H:%M')
+          = @message.created_at.strftime("%H:%M")
         .col-lg-2{style:"font-size:120px;color:#F2F2F2;"}
           %i.fa.fa-envelope-o.hidden-xs.hidden-sm.hidden-
       %hr   

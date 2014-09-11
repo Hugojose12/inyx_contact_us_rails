@@ -1,26 +1,24 @@
 angular.module('contact', [])
-	.controller('indexCtrl', ['$scope','contact', function($scope, contact) {				
-		contact.load();
-		$scope.messages = contact;
-		$scope.interval_a = 0;
-		$scope.interval_b = 10;
-		$scope.page = 1;
-		$scope.btnDelete = false;
-		$scope.btnAllSelect = false;
-		$scope.count = 0;
+	.controller('indexCtrl', ['$scope','contact', function($scope, contact) {			
 
 		$scope.init = function(){
 			ctrl.pages = {};
-			contact.count_reads($scope);	
+			contact.load();
+			$scope.messages = contact;
+			$scope.interval_a = ctrl.interval_a;
+			$scope.interval_b = ctrl.interval_b;
+			$scope.page = ctrl.page;
+			$scope.btnDelete = false;
+			$scope.btnAllSelect = false;
 		}
 
 		$scope.destroy = function() {
 			if (confirm("¿Deseas eliminar los mensajes seleccionados?") == true) {
+				ctrl.removeItemTable($scope.messages);				
 			 	contact.destroy(ctrl.selected);
-			 	ctrl.pageInit($scope); 	
-				contact.load();
- 				$scope.messages = contact; 				
+			 	ctrl.pageInit($scope); 					
 				contact.count_reads($scope);
+			 	ctrl.selected = [];
 			}
 		};
 
@@ -51,12 +49,11 @@ angular.module('contact', [])
 			ctrl.paginateControl($scope, "last");			
 		}
 	}])
-	.controller('showCtrl', ['$scope','contact', function($scope, contact) {
 
-		var selected = [];
+	.controller('showCtrl', ['$scope','contact', function($scope, contact) {
 		
 		$scope.init = function(){
-			//init function
+			
 		}
 
 		$scope.index = function(){
@@ -65,10 +62,10 @@ angular.module('contact', [])
 
 		$scope.destroy = function(id) {
 		    if (confirm("¿Deseas eliminar este mensaje?") == true) {
-		    	selected.push(id);
-			 	contact.destroy(selected);
-			 	selected = [] /*incializa el array luego de eliminar*/
-			 	document.location ='/admin/messages';
+		    	ctrl.selected.push(id);
+			 	contact.destroy(ctrl.selected);
+			 	ctrl.selected = [] /*incializa el array luego de eliminar*/
+			 	route.index_path();
 		    } 			
 		};
 	}]);
