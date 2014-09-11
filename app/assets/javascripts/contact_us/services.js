@@ -20,7 +20,7 @@ angular.module('contact').factory('contact', [
         contact.data = output;
       });
     });    
-  };  
+  };
 
   return contact;
   }
