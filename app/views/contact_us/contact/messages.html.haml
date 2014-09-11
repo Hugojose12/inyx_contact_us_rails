@@ -18,12 +18,12 @@
       %i.fa.fa-arrow-right
     %button.btn.btn-default.pull-right{"ng-click" => "lastList()", :title => "Atras"}
       %i.fa.fa-arrow-left
-  %br
+  %br 
     .panel.panel-default
       .panel-heading
         %b
           %i.fa.fa-inbox
-          Buzón de entrada
+          Buzón de entrada ({{count}})          
         %p.pull-right.hidden-xs
           %b {{messages.data.length}}
           mensajes en archivo

@@ -7,20 +7,20 @@ angular.module('contact', [])
 		$scope.page = 1;
 		$scope.btnDelete = false;
 		$scope.btnAllSelect = false;
+		$scope.count = 0;
 
 		$scope.init = function(){
 			ctrl.pages = {};
-			$scope.page = 1;			
-			$scope.interval_a = 0;
-			$scope.interval_b = 10;
+			contact.count_reads($scope);	
 		}
 
 		$scope.destroy = function() {
 			if (confirm("¿Deseas eliminar los mensajes seleccionados?") == true) {
 			 	contact.destroy(ctrl.selected);
-			 	ctrl.pageInit($scope);
+			 	ctrl.pageInit($scope); 	
 				contact.load();
- 				$scope.messages = contact;
+ 				$scope.messages = contact; 				
+				contact.count_reads($scope);
 			}
 		};
 
@@ -36,6 +36,7 @@ angular.module('contact', [])
 			contact.load();
 			$scope.messages = contact;							
 			ctrl.pageInit($scope);
+			contact.count_reads($scope);
 		}
 
 		$scope.show = function(id){	

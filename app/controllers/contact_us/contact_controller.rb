@@ -36,6 +36,14 @@ module ContactUs
       end
     end
 
+    def count_message_read
+      msn_read = ContactUs::Message.where(:read=>"false").count
+      respond_to do |format|
+        format.html
+        format.json { render :json => msn_read.as_json }
+      end
+    end
+
     def one_message
       message = Message.find(params[:id])
       respond_to do |format|
@@ -43,18 +51,7 @@ module ContactUs
       end
     end   
 
-    def read_message
-      message = Message.find(params[:id])
-      if message.read == false
-        message.read = true
-        message.save        
-      end
-      respond_to do |format|
-        format.json { render :json => message.as_json }
-      end
-    end 
-
-    def destroy
+   def destroy
       ContactUs::Message.destroy( redefine_destroy params[:ids].split(",") )
       respond_to do |format|
         format.html { redirect_to messages_path, notice: 'Mensajes eliminados.' }

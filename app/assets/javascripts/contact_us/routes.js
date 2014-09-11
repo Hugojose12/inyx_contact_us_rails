@@ -16,9 +16,8 @@ var route = {};
   
   	this.destroy_path = "/admin/contact/destroy/";
 
-  	this.read_path = function(id){
-  		return '../contact/angular_read/'+id+'.json'
-  	}
+  	this.reads_path = '/admin/contact/angular_reads.json'
+  	
   	this.find_message_path = function(id){
   		return '/admin/contact/angular_message/'+id+'.json'
   	}  	
