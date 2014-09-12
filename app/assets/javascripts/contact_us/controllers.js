@@ -5,19 +5,21 @@ angular.module('contact', [])
 			ctrl.pages = {};
 			contact.load();
 			$scope.messages = contact;
+			$scope.count = 0;
 			$scope.interval_a = ctrl.interval_a;
 			$scope.interval_b = ctrl.interval_b;
 			$scope.page = ctrl.page;
 			$scope.btnDelete = false;
 			$scope.btnAllSelect = false;
+			contact.count_reads($scope);
 		}
 
 		$scope.destroy = function() {
 			if (confirm("¿Deseas eliminar los mensajes seleccionados?") == true) {
 				ctrl.removeItemTable($scope.messages);				
 			 	contact.destroy(ctrl.selected);
-			 	ctrl.pageInit($scope); 					
-				contact.count_reads($scope);
+				contact.count_reads($scope);	 	
+			 	ctrl.pageInit($scope);			 		 	
 			 	ctrl.selected = [];
 			}
 		};

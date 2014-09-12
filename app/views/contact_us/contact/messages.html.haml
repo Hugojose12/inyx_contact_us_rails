@@ -4,11 +4,15 @@
     .form-group
       .input-group
         .input-group-addon
-          %i.fa.fa-search       
+          %i.fa.fa-search
+        %input#input-search{"ng-model" => "buscar.$", :placeholder => "Buscar Mensaje", :type => "text"}        
   %br
 
   .panel.panel-default
     .panel-heading
+      %button.btn.btn-danger{:disabled =>"", :title => "Actualizar lista de mensajes"}
+        %i.fa.fa-envelope        
+        {{count}}
       %button.btn.btn-default{"ng-click" => "refresh()", :title => "Actualizar lista de mensajes"}
         %i.fa.fa-refresh#icon-refresh
       %a.btn.btn-default{"ng-show" => "messages.data.length", "ng-click" => "allSelected(messages)", :title => "Seleccionar todos los mensajes"}
