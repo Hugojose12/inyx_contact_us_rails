@@ -10,14 +10,19 @@ angular.module('contact', [])
 			$scope.interval_b = ctrl.interval_b;
 			$scope.page = ctrl.page;
 			$scope.btnDelete = false;
-			$scope.btnAllSelect = false;
+			$scope.btnAllSelect = false;			
 			contact.count_reads($scope);
+			//Alerts
+			$scope.alert = false;
+			$scope.msnAlert = "Exitosamente!";
+			$scope.statusAlert="success";
 		}
 
 		$scope.destroy = function() {
-			if (confirm("¿Deseas eliminar los mensajes seleccionados?") == true) {
+			if (confirm("¿Deseas eliminar los mensajes seleccionados?") == true) {				
+			 	$scope.alert = true;
 				ctrl.removeItemTable($scope.messages);				
-			 	contact.destroy(ctrl.selected);
+			 	contact.destroy(ctrl.selected, $scope);
 				contact.count_reads($scope);	 	
 			 	ctrl.pageInit($scope);			 		 	
 			 	ctrl.selected = [];
@@ -49,6 +54,10 @@ angular.module('contact', [])
 
 		$scope.lastList = function(){
 			ctrl.paginateControl($scope, "last");			
+		}
+
+		$scope.alertClose = function(){
+			$scope.alert = false;
 		}
 	}])
 

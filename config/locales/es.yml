@@ -1,0 +1,14 @@
+es:
+  engine:
+    contact_us: "Contacto"
+  contact:
+    messages_cont: "mensajes en archivo."
+    actions:
+      page: "Página"
+      search: "Buscar Mensaje"
+      empty: "No hay mensajes."
+      refresh: "Actualizar lista de mensajes"
+      all_messages: "Seleccionar todos los mensajes"
+      delete_all_messages: "Borrar mensajes seleccionados"
+      delete_message: "Borrar mensaje"
+      inbox: "Bandeja de entrada"

@@ -21,8 +21,8 @@ angular.module('contact').factory('contact', [
     })
   }
 
-  contact.destroy = function(ids) {    
-    Model.destroy(route.destroy_path, $http, ids, function(output){
+  contact.destroy = function(ids, $scope) {    
+    Model.destroy(route.destroy_path, $http, $scope, ids, function(output){     
       Model.get(route.index_json_path, $http, function(output){
         contact.data = output;
       });
