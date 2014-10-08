@@ -19,7 +19,7 @@ module ContactUs
         ContactUs::Message.create!(:name=>params[:name], :email=>params[:email], :message=>params[:comment])
         redirect_to contact_path,  flash: { notice: params[:name]+', ¡Tu mensaje ha sido en enviado!' }
       else
-        redirect_to contact_path, flash: { danger: params[:name]+'Error en el captcha' }
+        redirect_to contact_path
       end
     end
 
