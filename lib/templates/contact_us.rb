@@ -4,7 +4,7 @@ ContactUs.setup do |config|
 	config.mailer_from = "no-reply@inyxtech.com"
 	config.name_web = "Inyxtech"
 	config.route_send = "/contact"
-	config.active_front = true
+	config.active_form = true
 
 	# Agregar keys de google recaptcha
 	Recaptcha.configure do |config|
