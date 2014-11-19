@@ -4,7 +4,8 @@ require 'recaptcha'
 module ContactUs
 	# Dirección de correo electronico que recibirá
   mattr_accessor :mailer_from
-
+  # Ruta de envio de contactos
+  mattr_accessor :route_send
   # Dirección de correo electronico que enviará
   mattr_accessor :mailer_to
 

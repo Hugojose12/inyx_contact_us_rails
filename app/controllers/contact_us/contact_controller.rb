@@ -17,9 +17,9 @@ module ContactUs
       if verify_recaptcha(attribute: "contact", message: "Oh! It's error with reCAPTCHA!")
         ContactMailer.contact(params).deliver
         ContactUs::Message.create!(:name=>params[:name], :email=>params[:email], :message=>params[:comment])
-        redirect_to contact_path,  flash: { notice: params[:name]+', ¡Tu mensaje ha sido en enviado!' }
+        redirect_to ContactUs::route_send,  flash: { notice: params[:name]+', ¡Tu mensaje ha sido en enviado!' }
       else
-        redirect_to contact_path
+        redirect_to ContactUs::route_send
       end
     end
 
