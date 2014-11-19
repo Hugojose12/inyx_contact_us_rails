@@ -8,6 +8,8 @@ module ContactUs
   mattr_accessor :route_send
   # Dirección de correo electronico que enviará
   mattr_accessor :mailer_to
+  # activar el front
+  mattr_accessor :active_form
 
   # Ubicación de la gema
   mattr_accessor :name_web

@@ -1,6 +1,6 @@
 ContactUs::Engine.routes.draw do
-	post "contact/send_contact_message" 	
-	get 'contact', to: 'contact#index'
+	post "contact/send_contact_message"	 	
+	get 'contact', to: 'contact#index' if ContactUs::active_form
 	scope :admin do
 		#rails
 		get "messages", to: 'contact#messages'		
