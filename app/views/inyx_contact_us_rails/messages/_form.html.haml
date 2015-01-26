@@ -1,0 +1,27 @@
+%section.contact_us{style: "margin-top: 70px;"}
+  .container
+    %h1
+      %i.fa.fa-phone-square
+      %strong Contacto
+      %small.hidden-xs Toda la información necesaria para contactárnos.
+    %hr
+
+    .col-lg-4.col-md-4.col-sm-6.col-xs-12
+      .widget{style: "margin-top:5px;"}
+        .widget-header
+          %h4 Formulario de contacto
+        .content-widget
+          = form_tag({controller: "messages", action: "send_contact_message", method: "post"}, {class: "contact_form"}) do
+            = text_field_tag :name, "", :class=>'form-control', :type => "text", :placeholder=>'Nombre', style: 'margin-bottom: 10px;'
+            = text_field_tag :subject, "", :class=>'form-control', :type => "text", :placeholder=>'Asunto', style: 'margin-bottom: 10px;'
+            = text_field_tag :email, "", :class=>'form-control', :type => "text", :placeholder=>'Email', style: 'margin-bottom: 10px;'
+            = text_area_tag :content, "", :class=>'form-control' , :placeholder=>'Mensaje', style: 'margin-bottom: 10px; height: 80px;'
+            #recaptcha_widget{:style => "display:block"}
+              #recaptcha_image
+              .input-group{ style:'margin-top: 5px; margin-bottom:10px;'}
+                = text_field_tag :recaptcha_response_field, "",type: "text", id: "recaptcha_response_field", class: "form-control", placeholder: "Captcha"
+                %span.input-group-btn
+                  = button_tag "<i class='fa fa-refresh'></i>".html_safe, :type => "button", class: "form-control", :onclick => "javascript:Recaptcha.reload(); return false;"
+            = raw recaptcha_tags :display => { :theme => 'custom', lang: 'es' }, ajax: true
+            = button_tag(type: 'submit', class: "btn btn-info", style:"width:100%") do
+              %i.fa.fa-envelope.fa-2x
