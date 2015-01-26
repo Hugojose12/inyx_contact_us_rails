@@ -10,21 +10,24 @@
 				%i.fa.fa-circle-o-notch.fa-spin{ 'ng-show' => "loadingLast" }
 				%i.fa.fa-arrow-left{ 'ng-show' => "!loadingLast" }
 	.panel-body#grid{ style: "border-right: 1px solid #e7e7e7;padding-left: 0px;padding-right: 0px;border-top-width: 36px;" }	
-		%table.grid{style: "width:100%;"}
+		%table.grid{style: "width:100%;", "ng-controller"=>"indexContact"}
 			%tbody
-				%tr{ class: "select-{{object.checked}}", "ng-click" => "show_object(object)", :id => "row-{{object.id}}", "ng-repeat" => "object in objects | startFrom:currentPage*pageSize | limitTo:pageSize"}
+				%tr{ class: "select-{{object.checked}}", "ng-click" => "show_object(object);read(object);", :id => "row-{{object.id}}", "ng-repeat" => "object in objects | startFrom:currentPage*pageSize | limitTo:pageSize"}
 					%td{ width: "1px;" }
 						.checkboxFour
 							%input.checkboxFourInput{:id => "check-{{object.id}}", :type => "checkbox", "ng-model" => "object.checked", "ng-click" => "selected(object); $event.stopPorpagation();" }
 							%label{ for: "check-{{object.id}}" }
 								%span
 					%td
-						%i.fa.fa-envelope
 						= link_to "{{show_path(object.id)}}", style: "width:100%;" do
 							{{ object.name }}
 					%td 
 						= link_to "{{show_path(object.id)}}", style: "width:100%;" do
-							{{ object.subject}}
+							{{ object.created_at}}
+					%td
+						= link_to "{{show_path(object.id)}}", style: "width:100%;" do
+							%i.fa.fa-envelope{'ng-show'=>"!object.read"}
+							%i.fa.fa-file-text-o{'ng-show'=>"object.read"}
 				%tr{"ng-show" => "!objects.length"}
 					%td{:style => "width:100%"}
 						%center

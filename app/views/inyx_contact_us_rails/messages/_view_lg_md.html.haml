@@ -29,19 +29,21 @@
                 %i.fa.fa-arrow-left{ 'ng-show' => "!loadingLast" }
           .panel-body{ style: "border-right: 1px solid #e7e7e7;" }
             #table-scroll
-              %table.grid{style: "width:100%"}
+              %table.grid{style: "width:100%", "ng-controller"=>"indexContact"}
                 %tbody
-                  %tr{ class: "select-{{object.checked}}", "ng-click" => "show_object(object)", :id => "row-{{object.id}}", "ng-repeat" => "object in objects | startFrom:currentPage*pageSize | limitTo:pageSize"}
+                  %tr{ class: "select-{{object.checked}}", "ng-click" => "show_object(object);read(object);", :id => "row-{{object.id}}", "ng-repeat" => "object in objects | startFrom:currentPage*pageSize | limitTo:pageSize"}
                     %td{ width: "1px;" }
                       .checkboxFour
                         %input.checkboxFourInput{:id => "check-{{object.id}}", :type => "checkbox", "ng-model" => "object.checked", "ng-click" => "selected(object); $event.stopPorpagation();" }
                         %label{ for: "check-{{object.id}}" }
                           %span
                     %td 
-                      %i.fa.fa-envelope
+                      %i.fa.fa-envelope{'ng-show'=>"!object.read"}
+                      %i.fa.fa-file-text-o{'ng-show'=>"object.read"}
                     %td {{ object.name }}
                     %td {{ object.subject }}
-                    %td {{ object.created_at | date}} - {{ object.created_at | date:'HH:mm'}}                   
+                    %td {{ object.created_at}} 
+                    %td {{showclick}}             
                   %tr{"ng-show" => "!objects.length"}
                     %td{:style => "width:100%"}
                       %center
@@ -76,7 +78,7 @@
                   {{object_data.email}}
                   %br/
                   %label Fecha:
-                  {{object_data.created_at | date : format : timezone}}
+                  {{object_data.created_at}}
                   %hr{style: "border:1px solid #4157d3"}
                   %p{align: "justify"}
                     {{object_data.content}}                  

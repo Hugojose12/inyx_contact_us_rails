@@ -5,6 +5,7 @@ InyxContactUsRails::Engine.routes.draw do
 			collection do
 				post '/delete', to: 'messages#delete'
 			end
-		end		
+		end	
+		get "messages/read/:id", to: "messages#read"
 	end
 end

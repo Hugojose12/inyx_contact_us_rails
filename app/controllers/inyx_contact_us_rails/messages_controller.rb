@@ -46,6 +46,15 @@ module InyxContactUsRails
       redirect_to messages_url, notice: 'Mensaje ha sido borrado satisfactoriamente.'
     end
 
+    def read
+      @message = Message.find(params[:id])
+      @message.update_attribute(:read, true) if @message.read == false
+      respond_to do |format|
+        format.html
+        format.json { render :json => @message.as_json }
+      end
+    end
+
     private
       # Use callbacks to share common setup or constraints between actions.
       def set_message
