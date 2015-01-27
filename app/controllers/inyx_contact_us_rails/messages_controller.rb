@@ -4,7 +4,8 @@ module InyxContactUsRails
   class MessagesController < ApplicationController
     before_action :set_message, only: [:show, :edit, :update, :destroy]
     layout :resolve_layout
-    load_and_authorize_resource
+    load_and_authorize_resource except: [:new, :send_contact_message]
+    before_filter :authenticate_user!, except: [:new, :send_contact_message]
     # GET /messages
 
 
@@ -60,7 +61,7 @@ module InyxContactUsRails
 
     def send_contact_message
       if verify_recaptcha(attribute: "contact", message: "Oh! It's error with reCAPTCHA!")
-        InyxContactUsRails::ContactMailer.contact(params).deliver
+        ContactMailer.contact(params).deliver
         Message.create!(:name=>params[:name], :subject=>params[:subject], :email=>params[:email], :content=>params[:content])
         redirect_to InyxContactUsRails::redirection,  flash: { notice: params[:name]+', ¡Tu mensaje ha sido en enviado!' }
       else
