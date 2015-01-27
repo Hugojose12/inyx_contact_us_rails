@@ -4,6 +4,7 @@ module InyxContactUsRails
   class MessagesController < ApplicationController
     before_action :set_message, only: [:show, :edit, :update, :destroy]
     layout :resolve_layout
+    load_and_authorize_resource
     # GET /messages
 
 

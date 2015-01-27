@@ -17,8 +17,28 @@ module InyxContactUsRails
     end
 
   	def self.query(query)
-	   { query: { multi_match:  { query: query, fields: [:name, :subject, :email, :created_at] }  }, sort: { id: "desc" }, size: 10 }
+	   { query: { multi_match:  { query: query, fields: [:name, :subject, :email, :created_at] }  }, sort: { id: "desc" }, size: Message.count}
 	 end
+
+   def self.index(current_user)
+     Message.order("created_at Desc")
+   end
+
+    def self.index_total(objects, current_user)
+      objects.records.count
+    end
+
+    def self.index_search(objects, current_user)
+      objects.records.order("created_at Desc")
+    end
+
+    def self.route_index
+      "/admin/messages"
+    end
+
+    def self.multiple_destroy(ids, current_user)
+      Message.destroy ids
+    end
 
   end
   Message.import

@@ -12,8 +12,9 @@
           %i.fa.fa-user
           Mensaje - 
           = @message.id
-        = link_to message_path(@message), title: t('admin.actions.delete'), :method => :delete, :data => { :confirm => '¿Estas seguro de querer eliminar este usuario?' }, class: "btn btn-default btn-action pull-right" do
-          %i.fa.fa-remove  
+        - if can? :destroy, InyxContactUsRails::Message 
+          = link_to message_path(@message), title: t('admin.actions.delete'), :method => :delete, :data => { :confirm => '¿Estas seguro de querer eliminar este usuario?' }, class: "btn btn-default btn-action pull-right" do
+            %i.fa.fa-remove  
 
     .panel-body#body-show
       %label Nombre: 

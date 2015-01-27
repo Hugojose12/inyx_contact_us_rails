@@ -13,11 +13,12 @@
 		%table.grid{style: "width:100%;", "ng-controller"=>"indexContact"}
 			%tbody
 				%tr{ class: "select-{{object.checked}}", "ng-click" => "show_object(object);read(object);", :id => "row-{{object.id}}", "ng-repeat" => "object in objects | startFrom:currentPage*pageSize | limitTo:pageSize"}
-					%td{ width: "1px;" }
-						.checkboxFour
-							%input.checkboxFourInput{:id => "check-{{object.id}}", :type => "checkbox", "ng-model" => "object.checked", "ng-click" => "selected(object); $event.stopPorpagation();" }
-							%label{ for: "check-{{object.id}}" }
-								%span
+					- if can? :delete, InyxContactUsRails::Message 
+						%td{ width: "1px;" }
+							.checkboxFour
+								%input.checkboxFourInput{:id => "check-{{object.id}}", :type => "checkbox", "ng-model" => "object.checked", "ng-click" => "selected(object); $event.stopPorpagation();" }
+								%label{ for: "check-{{object.id}}" }
+									%span
 					%td
 						= link_to "{{show_path(object.id)}}", style: "width:100%;" do
 							{{ object.name }}
