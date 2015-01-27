@@ -17,35 +17,10 @@ module InyxContactUsRails
     def new
       @message = Message.new
     end
-
-    # GET /messages/1/edit
-    def edit
-    end
-
-    # POST /messages
-    def create
-      @message = Message.new(message_params)
-
-      if @message.save
-        redirect_to InyxContactUsRails::redirection, notice: 'Message was successfully created.'
-      else
-        render :new
-      end
-    end
-
-    # PATCH/PUT /messages/1
-    def update
-      permit_user?
-      if @message.update(message_params)
-        redirect_to @message, notice: 'Message was successfully updated.'
-      else
-        render :edit
-      end
-    end
+   
 
     # DELETE /messages/1
     def destroy
-      permit_user?
       @message.destroy
       redirect_to messages_url, notice: 'Mensaje ha sido borrado satisfactoriamente.'
     end
@@ -70,12 +45,7 @@ module InyxContactUsRails
     end
 
     private
-      #authorization
-      def permit_user?
-        if current_user.has_role? :moderator
-          raise CanCan::AccessDenied.new("Acceso denegado", action_name, "/admin/messages")
-        end
-      end
+
       # Use callbacks to share common setup or constraints between actions.
       def set_message
         @message = Message.find(params[:id])
