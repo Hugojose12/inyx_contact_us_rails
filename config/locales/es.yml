@@ -1,0 +1,5 @@
+es:
+  messages:
+    actions:
+        destroy: 
+          confirm: "¿Estas seguro de querer eliminar los mensajes seleccionados?"
