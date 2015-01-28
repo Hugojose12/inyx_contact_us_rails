@@ -32,13 +32,13 @@ Seguido a esto debemos cargar los assets de la gema, agregando lo siguiente
 en application.js
 
 ```
-//= require contact_us/application
+//= require inyx_contact_us_rails/application
 ```
 
 Luego importar migraciones y crear las tablas de contactos desde la consola
 
 ```
-rake contact_us:install:migrations 
+rake inyx_contact_us_rails:install:migrations 
 ```
 ```
 rake db:migrate
