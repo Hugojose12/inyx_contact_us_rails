@@ -19,6 +19,7 @@ Añadir la siguiente linea a su Gemfile
 
 ```ruby
 gem 'inyx_contact_us_rails', git: "https://github.com/inyxtech/inyx_contact_us_rails.git"
+gem "recaptcha"
 ```
 
 Para agregar `config/initializers/contact_us.rb` y asi estabelecer los datos de configuración debe ejecutar
