@@ -22,6 +22,12 @@ gem 'inyx_contact_us_rails', git: "https://github.com/inyxtech/inyx_contact_us_r
 gem "recaptcha"
 ```
 
+La siguiente linea habilitará las rutas del engine
+
+```ruby
+mount InyxContactUsRails::Engine, :at => '', as: 'messages'
+```
+
 Para agregar `config/initializers/contact_us.rb` y asi estabelecer los datos de configuración debe ejecutar
 
 ```ruby
