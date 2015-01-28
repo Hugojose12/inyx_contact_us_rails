@@ -22,7 +22,7 @@ gem 'inyx_contact_us_rails', git: "https://github.com/inyxtech/inyx_contact_us_r
 gem "recaptcha"
 ```
 
-La siguiente linea habilitará las rutas del engine
+La siguiente linea habilitará las rutas del engine, debe ser colocada en el archivo `config/initializers/routes.rb`
 
 ```ruby
 mount InyxContactUsRails::Engine, :at => '', as: 'messages'
