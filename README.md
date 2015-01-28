@@ -57,6 +57,14 @@ Ubicarse en la ruta del proyecto desde la terminal y ejecutar
 Bundle install
 ```
 
+Por ultimo ir al directorio `app/assets/javascript/` y abrir el archivo main.js y agregar 'contact_us' a la suigiente linea de codigo codigo, ejemplo:
+
+```ruby
+angular.module('inyxmater', ['admin']) #por defecto
+
+angular.module('inyxmater', ['user', 'contact_us']) #debe quedar asi
+```
+
 ## Configuración
 
 Para agregar `config/initializers/contact_us.rb` y asi estabelecer los datos de configuración debe ejecutar
