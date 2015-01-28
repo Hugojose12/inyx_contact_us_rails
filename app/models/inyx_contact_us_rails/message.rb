@@ -17,7 +17,7 @@ module InyxContactUsRails
     end
 
   	def self.query(query)
-	   { query: { multi_match:  { query: query, fields: [:name, :subject, :email, :created_at] }  }, sort: { id: "desc" }, size: Message.count}
+	   { query: { multi_match:  { query: query, fields: [:name, :subject, :email, :created_at], operator: :and }  }, sort: { id: "desc" }, size: Message.count}
 	 end
 
    def self.index(current_user)

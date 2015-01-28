@@ -16,7 +16,7 @@
               %a.btn.btn-default.btn-action{"ng-show" => "objects.length", "ng-click" => "allSelected(objects)", :title => t("admin.buttons.select_all") }
                 %i.fa.fa-square-o{"ng-show" => "!btnDelete"}
                 %i.fa.fa-check-square-o{ "ng-show" => "btnDelete" } 
-              %a.btn.btn-default.btn-action#btn-delete{ "ng-show" => "btnDelete", "ng-click" => "destroy()", :title => t("admin.buttons.trash") }
+              %a.btn.btn-default.btn-action#btn-delete{ "ng-show" => "btnDelete", "ng-click" => "destroy('¿Estas seguro de querer eliminar los mensajes seleccionados?')", :title => t("admin.buttons.trash") }
                 %i.fa.fa-circle-o-notch.fa-spin{ 'ng-show' => "loadingDelete" }
                 %i.fa.fa-trash-o{ 'ng-show' => "!loadingDelete" }
            
