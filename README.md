@@ -18,7 +18,7 @@ Es un Engine que proporciona un formulario de contacto básico
 Añadir la siguiente linea a su Gemfile
 
 ```ruby
-gem 'contact_us', git: "https://github.com/inyxtech/inyx_contact_us_rails.git"
+gem 'inyx_contact_us_rails', git: "https://github.com/inyxtech/inyx_contact_us_rails.git"
 ```
 
 Para agregar `config/initializers/contact_us.rb` y asi estabelecer los datos de configuración debe ejecutar
