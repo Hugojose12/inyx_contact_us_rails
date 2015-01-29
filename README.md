@@ -18,7 +18,14 @@ Es un Engine que proporciona un formulario de contacto básico
 Añadir la siguiente linea a su Gemfile
 
 ```ruby
-gem 'contact_us', git: "https://github.com/inyxtech/inyx_contact_us_rails.git"
+gem 'inyx_contact_us_rails', git: "https://github.com/inyxtech/inyx_contact_us_rails.git"
+gem "recaptcha"
+```
+
+La siguiente linea habilitará las rutas del engine, debe ser colocada en el archivo `config/initializers/routes.rb`
+
+```ruby
+mount InyxContactUsRails::Engine, :at => '', as: 'messages'
 ```
 
 Para agregar `config/initializers/contact_us.rb` y asi estabelecer los datos de configuración debe ejecutar
@@ -32,13 +39,13 @@ Seguido a esto debemos cargar los assets de la gema, agregando lo siguiente
 en application.js
 
 ```
-//= require contact_us/application
+//= require inyx_contact_us_rails/application
 ```
 
 Luego importar migraciones y crear las tablas de contactos desde la consola
 
 ```
-rake contact_us:install:migrations 
+rake inyx_contact_us_rails:install:migrations 
 ```
 ```
 rake db:migrate
@@ -48,6 +55,14 @@ Ubicarse en la ruta del proyecto desde la terminal y ejecutar
 
 ```ruby
 Bundle install
+```
+
+Por ultimo ir al directorio `app/assets/javascript/` y abrir el archivo main.js y agregar 'contact_us' a la suigiente linea de codigo codigo, ejemplo:
+
+```ruby
+angular.module('inyxmater', ['admin']) #por defecto
+
+angular.module('inyxmater', ['user', 'contact_us']) #debe quedar asi
 ```
 
 ## Configuración
