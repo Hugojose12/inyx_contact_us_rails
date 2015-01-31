@@ -64,7 +64,7 @@
                   %i.fa.fa-envelope
                   Mensaje - {{ object_data.id }}
                 - if can? :destroy, InyxContactUsRails::Message
-                  = link_to "{{destroy_path(object_data.id)}}", title: t('admin.actions.delete'), :method => :delete, :data => { :confirm => '¿Estas seguro de querer eliminar este usuario?' }, class: "btn btn-default btn-action pull-right", "ng-show" => "object_data" do
+                  = link_to "{{destroy_path(object_data.id)}}", title: t('admin.actions.delete'), :method => :delete, :data => { :confirm => '¿Estas seguro de querer eliminar este mensaje?' }, class: "btn btn-default btn-action pull-right", "ng-show" => "object_data" do
                     %i.fa.fa-remove                
               .actions{ "ng-show" => "!object_data", style: "margin-top:6px;" }
                 %i.fa.fa-envelope
