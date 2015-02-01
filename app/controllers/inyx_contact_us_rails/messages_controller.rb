@@ -59,7 +59,7 @@ module InyxContactUsRails
       def resolve_layout
        case action_name
          when "new"
-           "application"
+           "frontend/application"
          else 
            "admin/application"
        end
