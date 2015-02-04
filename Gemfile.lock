@@ -3,7 +3,7 @@ PATH
   specs:
     inyx_contact_us_rails (0.0.1)
       haml_rails
-      rails (~> 4.1.8)
+      rails (~> 4.1.4)
       simple_form
 
 GEM
