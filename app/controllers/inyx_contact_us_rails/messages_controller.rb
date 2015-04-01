@@ -36,6 +36,7 @@ module InyxContactUsRails
 
     def send_contact_message
       @message = Message.new(:name=>params[:name], :subject=>params[:subject], :email=>params[:email], :content=>params[:content])      if verify_recaptcha(attribute: "contact", message: "Oh! It's error with reCAPTCHA!") and @message.save
+      if verify_recaptcha(attribute: "contact", message: "Oh! It's error with reCAPTCHA!") and @message.save
         ContactMailer.contact(params).deliver
         redirect_to InyxContactUsRails::redirection,  flash: { notice: params[:name]+', ¡Tu mensaje ha sido en enviado!' }
       else
