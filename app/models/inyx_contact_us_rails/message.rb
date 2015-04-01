@@ -3,8 +3,11 @@ module InyxContactUsRails
   class Message < ActiveRecord::Base
   	include Elasticsearch::Model
   	include Elasticsearch::Model::Callbacks
-
-  	 def as_json(options = {})
+  
+  validates_presence_of :name, :subject, :email, :content
+  
+  
+  def as_json(options = {})
       {
         id: self.id,
         name: self.name,
