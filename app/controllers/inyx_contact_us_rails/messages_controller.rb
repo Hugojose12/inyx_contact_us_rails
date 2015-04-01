@@ -35,12 +35,12 @@ module InyxContactUsRails
     end
 
     def send_contact_message
-      if verify_recaptcha(attribute: "contact", message: "Oh! It's error with reCAPTCHA!")
+      @message = Message.new(:name=>params[:name], :subject=>params[:subject], :email=>params[:email], :content=>params[:content]))
+      if verify_recaptcha(attribute: "contact", message: "Oh! It's error with reCAPTCHA!") and @message.save
         ContactMailer.contact(params).deliver
-        Message.create!(:name=>params[:name], :subject=>params[:subject], :email=>params[:email], :content=>params[:content])
         redirect_to InyxContactUsRails::redirection,  flash: { notice: params[:name]+', ¡Tu mensaje ha sido en enviado!' }
       else
-        redirect_to InyxContactUsRails::redirection
+        redirect_to InyxContactUsRails::redirection,  flash: { alert: 'Error, debe llenar todos los campos.' }
       end
     end
 
